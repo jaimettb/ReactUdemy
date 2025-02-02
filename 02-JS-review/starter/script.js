@@ -158,6 +158,29 @@ console.log(author, title, genres);
 //const primaryGenre = genres[0];
 //const secondaryGenre = genres[1];
 
-const [primaryGenre, secondaryGenre] = genres;
+const [primaryGenre, secondaryGenre, ...otherGenres] = genres;
 
-console.log(primaryGenre, secondaryGenre);
+console.log(primaryGenre, secondaryGenre, otherGenres);
+
+const newGenres = ["epic fantasy", ...genres];
+newGenres;
+
+const updatedBook = {
+  ...book,
+  // Adding new property
+  moviePublicationDate: "2001-12-19",
+
+  // Overwriting an existing property
+  pages: 500,
+};
+updatedBook;
+
+const summary = `${title}, a ${pages}-pages long book, was written by ${author} and published in ${
+  publicationDate.split("-")[0]
+}. The book has ${hasMovieAdaptation ? "" : "not"} been adapted as a movie`;
+summary;
+
+const pagesRange =
+  updatedBook.pages > 1000 ? "over a thousand" : "less than 1000";
+pagesRange;
+console.log(`The book has ${pagesRange}`);
