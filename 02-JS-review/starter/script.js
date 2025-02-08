@@ -266,3 +266,23 @@ arr;
 
 const sortedByPages = books.slice().sort((a, b) => a.pages - b.pages);
 sortedByPages;
+
+// 1) Add book to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J. K. Rowling",
+};
+
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+// 2) Delet book object from array
+const bookAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+bookAfterDelete;
+
+// 3) Update book object in the array
+const booksAfterUpdate = booksAfterAdd.map((book) =>
+  book.id === 1 ? { ...book, pages: 1210 } : book
+);
+booksAfterUpdate;
