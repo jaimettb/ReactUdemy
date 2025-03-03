@@ -26,7 +26,7 @@ function App() {
       <Avatar />
       <div className="data">
         <Intro />
-        <SkillList skillList={skills} />
+        <SkillList />
       </div>
     </div>
   );
@@ -49,10 +49,10 @@ function Intro() {
   );
 }
 
-function SkillList({ skillList }) {
+function SkillList() {
   return (
     <div className="skill-list">
-      {skillList.map((skill) => (
+      {skills.map((skill) => (
         <Skill skill={skill} />
       ))}{" "}
     </div>
@@ -64,11 +64,9 @@ function Skill({ skill }) {
     <div className="skill" color style={{ backgroundColor: skill.color }}>
       <span>{skill.skill}</span>
       <span>
-        {skill.level === "beginner"
-          ? "😥"
-          : skill.level == "intermediate"
-          ? "😊"
-          : "😁"}
+        {skill.level === "beginner" && "😥"}
+        {skill.level === "intermediate" && "😊"}
+        {skill.level === "advanced" && "😁"}
       </span>
     </div>
   );
