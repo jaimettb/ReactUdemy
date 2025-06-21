@@ -37,66 +37,33 @@ export default function App() {
 
 function TextExpander({
   children,
-  collapsedNumWords = 10,
+  collapsedNumWords = 20,
   expanded = false,
-  expandButtonText = "Expand",
-  collapseButtonText = "Collapse",
-  buttonColor,
+  expandButtonText = "Show more",
+  collapseButtonText = "Show less",
+  buttonColor = "#1f09cd",
   className,
 }) {
-  let [getExpanded, setExpanded] = useState(expanded);
+  let [isExpanded, setIsExpanded] = useState(expanded);
+  const displayText = isExpanded
+    ? children
+    : children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
 
-  function handleExpand(expanded) {
-    setExpanded((e) => (e = !expanded));
-  }
-
-  return (
-    <div className={className}>
-      {getExpanded
-        ? children
-        : truncateTextByWords(children, collapsedNumWords)}
-      <ExpandButton
-        expandButtonText={expandButtonText}
-        collapseButtonText={collapseButtonText}
-        buttonColor={buttonColor}
-        expanded={getExpanded}
-        onExpanded={handleExpand}
-      />
-    </div>
-  );
-}
-
-function ExpandButton({
-  expanded,
-  expandButtonText,
-  collapseButtonText,
-  buttonColor,
-  onExpanded,
-}) {
-  let buttonStyle = {
-    color: buttonColor ? buttonColor : "blue",
-    marginLeft: "5px",
-    border: "0px",
+  const buttonStyle = {
     background: "none",
-    fontSize: "15px",
-    fontWeight: "bold",
+    border: "none",
+    font: "inherit",
+    cursor: "pointer",
+    marginLeft: "6px",
+    color: buttonColor,
   };
 
   return (
-    <button style={buttonStyle} onClick={() => onExpanded(expanded)}>
-      {expanded ? collapseButtonText : expandButtonText}
-    </button>
+    <div className={className}>
+      <span>{displayText}</span>
+      <button onClick={() => setIsExpanded((exp) => !exp)} style={buttonStyle}>
+        {isExpanded ? collapseButtonText : expandButtonText}
+      </button>
+    </div>
   );
-}
-
-function truncateTextByWords(text, numWords) {
-  const words = text.trim().split(/\s+/);
-  const truncatedWords = words.slice(0, numWords);
-  let result = truncatedWords.join(" ");
-
-  if (words.length > numWords) {
-    result += "...";
-  }
-
-  return result;
 }
