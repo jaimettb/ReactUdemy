@@ -58,7 +58,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const query = "terminator";
+  const query = "matrix";
 
   useEffect(function () {
     async function fetchMovies() {
@@ -107,7 +107,10 @@ export default function App() {
           </>
         </Box>
         {selectedMovie && (
-          <MoviePopup movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
+          <MoviePopup
+            movie={selectedMovie}
+            onClose={() => setSelectedMovie(null)}
+          />
         )}
       </Main>
     </>
@@ -209,7 +212,11 @@ function MovieList({ movies, onMovieClick }) {
   return (
     <ul className="list">
       {movies?.map((movie) => (
-        <Movie movie={movie} key={movie.imdbID} onClick={() => onMovieClick(movie)} />
+        <Movie
+          movie={movie}
+          key={movie.imdbID}
+          onClick={() => onMovieClick(movie)}
+        />
       ))}
     </ul>
   );
@@ -232,44 +239,67 @@ function Movie({ movie, onClick }) {
 
 function MoviePopup({ movie, onClose }) {
   return (
-    <div style={{
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100vw",
-      height: "100vh",
-      background: "rgba(0,0,0,0.5)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: 1000
-    }}>
-      <div style={{
-        background: "#fff",
-        padding: 24,
-        borderRadius: 8,
-        minWidth: 300,
-        maxWidth: 400,
-        boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-        position: "relative"
-      }}>
-        <button onClick={onClose} style={{
-          position: "absolute",
-          top: 8,
-          right: 8,
-          background: "#eee",
-          border: "none",
-          borderRadius: "50%",
-          width: 32,
-          height: 32,
-          fontSize: 18,
-          cursor: "pointer"
-        }}>×</button>
-        <img src={movie.Poster} alt={movie.Title} style={{ width: "100%", borderRadius: 4 }} />
+    <div
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        background: "rgba(0,0,0,0.5)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1000,
+      }}
+    >
+      <div
+        style={{
+          background: "#fff",
+          padding: 24,
+          borderRadius: 8,
+          minWidth: 300,
+          maxWidth: 400,
+          boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+          position: "relative",
+        }}
+      >
+        <button
+          onClick={onClose}
+          style={{
+            position: "absolute",
+            top: 8,
+            right: 8,
+            background: "#eee",
+            border: "none",
+            borderRadius: "50%",
+            width: 32,
+            height: 32,
+            fontSize: 18,
+            cursor: "pointer",
+          }}
+        >
+          ×
+        </button>
+        <img
+          src={movie.Poster}
+          alt={movie.Title}
+          style={{ width: "100%", borderRadius: 4 }}
+        />
         <h2>{movie.Title}</h2>
-        <p><strong>Year:</strong> {movie.Year}</p>
-        {movie.imdbRating && <p><strong>IMDb Rating:</strong> {movie.imdbRating}</p>}
-        {movie.runtime && <p><strong>Runtime:</strong> {movie.runtime} min</p>}
+        <p>
+          <strong>Year:</strong> {movie.Year}
+        </p>
+        {movie.imdbRating && (
+          <p>
+            <strong>IMDb Rating:</strong> {movie.imdbRating}
+          </p>
+        )}
+        {movie.runtime && (
+          <p>
+            <strong>Runtime:</strong> {movie.runtime} min
+          </p>
+        )}
         {/* Add more details as needed */}
       </div>
     </div>
