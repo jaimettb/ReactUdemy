@@ -255,8 +255,19 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
 
   // /* eslint-disable */
   // if (imdbRating > 8) [isTop, setIsTop] = useState(true);
-
   // if (imdbRating > 8) return <div>Greatest ever!</div>;
+
+  // const [isTop, setIsTop] = useState(imdbRating > 8);
+  // console.log(isTop);
+
+  // useEffect(() => {
+  //   setIsTop(imdbRating > 8);
+  // }, [imdbRating]);
+
+  const isTop = imdbRating > 8;
+  console.log(isTop);
+
+  const [avgRatinig, setAvgRatinig] = useState(0);
 
   function handleAdd() {
     const newWatchedMovie = {
@@ -270,6 +281,9 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     };
     onAddWatched(newWatchedMovie);
     onCloseMovie();
+
+    // setAvgRatinig(Number(imdbRating));
+    // setAvgRatinig((avgRatinig) => (avgRatinig + userRating) / 2);
   }
 
   useEffect(() => {
